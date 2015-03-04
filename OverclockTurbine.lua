@@ -77,7 +77,7 @@ turbineActive = 'ACTIVE'
         if t.getInductorEngaged() == false then
             RtrStat = 'OFF'
         end
-       print('Turbine ' .. turbineCnt ..' power: ' .. t.getEnergyProducedLastTick() .. ' RF/t' ..' RF stored: ' ..  t.getEnergyStored() ..' Rotor Speed ' .. t.getRotorSpeed() .. ' Rotor:' RtrStat)
+       print('Turbine ' .. turbineCnt ..' power: ' .. t.getEnergyProducedLastTick() .. ' RF/t' ..' RF stored: ' ..  t.getEnergyStored() ..' Rotor Speed ' .. t.getRotorSpeed() .. ' Rotor:' .. RtrStat)
        turbineCnt = turbineCnt + 1
     end
 
