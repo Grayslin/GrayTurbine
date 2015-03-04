@@ -11,7 +11,6 @@ local colors=require("colors")
 
 local gpu=component.gpu
 side = require 'sides'
-rs = component.getPrimary('redstone')
 
 RS_CONTROL = side.south
 RF_BUFFER_MAX = 9000000
@@ -22,6 +21,7 @@ local tickCnt = 0
 local turbineCnt = 1
 local hours = 0
 local mins = 0
+local rtrstat = 'off'
 
 REACTORS = {}
 TURBINES = {}
@@ -62,13 +62,22 @@ term.clear()
 turbineCnt = 1
 turbineActive = 'ACTIVE'
   for _, t in pairs(TURBINES) do
-    if t.getActive == false then
-      turbineActive = 'SHUT DOWN'
-    end
-       print('\n-----' .. 'Turbine ' .. turbineCnt .. ' ' .. turbineActive ..'-----')
-       print('Turbine ' .. turbineCnt ..' power at ' .. t.getEnergyProducedLastTick() .. ' RF/t')
-       print('Turbine ' .. turbineCnt ..' RF stored: ' ..  t.getEnergyStored())      
-       print('Turbine ' .. turbineCnt ..' Rotor Speed ' .. t.getRotorSpeed())
+        if t.getActive == false then
+            turbineActive = 'SHUT DOWN'
+        end
+        if t.getRotorSpeed() < '1000000' then
+            t.setInductorEngaged(0)
+        end
+        if t.getRotorSpeed() > '1100000' then
+            t.setInductorEngaged(1)
+        end
+        if t.getInductorEngaged() == true then
+            RtrStat = 'ON'
+        end
+        if t.getInductorEngaged() == false then
+            RtrStat = 'OFF'
+        end
+       print('Turbine ' .. turbineCnt ..' power: ' .. t.getEnergyProducedLastTick() .. ' RF/t' ..' RF stored: ' ..  t.getEnergyStored() ..' Rotor Speed ' .. t.getRotorSpeed() .. ' Rotor:' RtrStat)
        turbineCnt = turbineCnt + 1
     end
 
