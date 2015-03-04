@@ -66,10 +66,10 @@ turbineActive = 'ACTIVE'
             turbineActive = 'SHUT DOWN'
         end
         if t.getRotorSpeed() < 1000000 then
-            t.setInductorEngaged(0)
+            t.setInductorEngaged(false)
         end
         if t.getRotorSpeed() > 1100000 then
-            t.setInductorEngaged(1)
+            t.setInductorEngaged(true)
         end
         if t.getInductorEngaged() == true then
             RtrStat = 'ON'
