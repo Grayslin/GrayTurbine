@@ -46,6 +46,10 @@ local function onKeyDown(opt)
   end
 end
 
+local function roundtfd(t)
+    return math.round(t*10)*0.1
+end
+
 while running do -- Main Loop
 term.clear()
   tickCnt = tickCnt + 1
@@ -77,7 +81,7 @@ turbineActive = 'ACTIVE'
         if t.getInductorEngaged() == false then
             RtrStat = 'OFF'
         end
-       print('Turbine ' .. turbineCnt ..' power: ' .. t.getEnergyProducedLastTick() .. ' RF/t' ..' RF stored: ' ..  t.getEnergyStored() ..' Rotor Speed ' .. t.getRotorSpeed() .. ' Rotor:' .. RtrStat)
+       print('Turbine ' .. turbineCnt ..' power: ' .. roundtfd(t.getEnergyProducedLastTick()) .. ' RF/t' ..' RF stored: ' ..  roundtfd(t.getEnergyStored()) ..' Rotor Speed ' .. roundtfd(t.getRotorSpeed()) .. ' Rotor:' .. RtrStat)
        turbineCnt = turbineCnt + 1
     end
 
