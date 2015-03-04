@@ -21,7 +21,7 @@ local tickCnt = 0
 local turbineCnt = 1
 local hours = 0
 local mins = 0
-local rtrstat = 'off'
+local RtrStat = 'OFF'
 
 REACTORS = {}
 TURBINES = {}
