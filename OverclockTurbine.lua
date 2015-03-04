@@ -13,8 +13,7 @@ local gpu=component.gpu
 side = require 'sides'
 
 RS_CONTROL = side.south
-RF_BUFFER_MAX = 9000000
-RF_BUFFER_MIN = 1000
+BUFFER_MAX = 900000
 TEMP_MAX = 300
 TEMP_MIN = 100
 local tickCnt = 0
@@ -75,6 +74,9 @@ turbineActive = 'ACTIVE'
         end
         if t.getRotorSpeed() > 1100000 then
             t.setInductorEngaged(true)
+        end
+        if t.getRotorSpeed() > 1000000 and t.getEnergyStored() > BUFFER_MAX then
+            t.setInductorEngaged(false)
         end
         if t.getInductorEngaged() == true then
             rtrStat = 'ON'
