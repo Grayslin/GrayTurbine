@@ -65,10 +65,10 @@ turbineActive = 'ACTIVE'
         if t.getActive == false then
             turbineActive = 'SHUT DOWN'
         end
-        if t.getRotorSpeed() < '1000000' then
+        if t.getRotorSpeed() < 1000000 then
             t.setInductorEngaged(0)
         end
-        if t.getRotorSpeed() > '1100000' then
+        if t.getRotorSpeed() > 1100000 then
             t.setInductorEngaged(1)
         end
         if t.getInductorEngaged() == true then
