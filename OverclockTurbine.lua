@@ -21,7 +21,7 @@ local tickCnt = 0
 local turbineCnt = 1
 local hours = 0
 local mins = 0
-local RtrStat = 'OFF'
+local rtrStat = 'OFF'
 
 REACTORS = {}
 TURBINES = {}
@@ -41,7 +41,7 @@ end
 
 local function onKeyDown(opt)
   if opt == keyboard.keys.q then
-    gpu.setResolution(160, 50)
+   -- gpu.setResolution(160, 50)
     running = false
   end
 end
@@ -76,12 +76,12 @@ turbineActive = 'ACTIVE'
             t.setInductorEngaged(true)
         end
         if t.getInductorEngaged() == true then
-            RtrStat = 'ON'
+            rtrStat = 'ON'
         end
         if t.getInductorEngaged() == false then
-            RtrStat = 'OFF'
+            rtrStat = 'OFF'
         end
-       print('Turbine ' .. turbineCnt ..' power: ' .. roundtfd(t.getEnergyProducedLastTick()) .. ' RF/t' ..' RF stored: ' ..  roundtfd(t.getEnergyStored()) ..' Rotor Speed ' .. roundtfd(t.getRotorSpeed()) .. ' Rotor:' .. RtrStat)
+       print('Turbine ' .. turbineCnt ..' power: ' .. roundtfd(t.getEnergyProducedLastTick()) .. ' RF/t' ..' RF stored: ' ..  roundtfd(t.getEnergyStored()) ..' Rotor Speed ' .. roundtfd(t.getRotorSpeed()) .. ' Rotor:' .. rtrStat)
        turbineCnt = turbineCnt + 1
     end
 
