@@ -14,6 +14,8 @@ side = require 'sides'
 
 RS_CONTROL = side.south
 BUFFER_MAX = 900000
+MAX_SPIN = 70000
+MIN_SPIN = 60000
 TEMP_MAX = 300
 TEMP_MIN = 100
 local tickCnt = 0
@@ -69,13 +71,16 @@ turbineActive = 'ACTIVE'
         if t.getActive == false then
             turbineActive = 'SHUT DOWN'
         end
-        if t.getRotorSpeed() < 1000000 then
+        if t.getRotorSpeed() < MIN_SPIN then
             t.setInductorEngaged(false)
         end
-        if t.getRotorSpeed() > 1100000 then
+        if t.getRotorSpeed() > MAX_SPIN then
             t.setInductorEngaged(true)
         end
-        if t.getRotorSpeed() > 1000000 and t.getEnergyStored() > BUFFER_MAX then
+        if t.getRotorSpeed() > MIN_SPIN + 1000 and t.getEnergyStored() == 0 then
+            t.setInductorEngaged(true)
+        end
+        if t.getRotorSpeed() > MIN_SPIN and t.getEnergyStored() > BUFFER_MAX then
             t.setInductorEngaged(false)
         end
         if t.getInductorEngaged() == true then
